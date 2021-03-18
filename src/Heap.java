@@ -1,6 +1,6 @@
 /*
- * Name: <your name>
- * EID: <your EID>
+ * Name: Eralp Orkun
+ * EID: eao789
  */
 
 // Implement your heap here
@@ -24,7 +24,10 @@ public class Heap {
      * @param students
      */
     public void buildHeap(ArrayList<Student> students) {
-        // TODO: implement this method
+        minHeap.ensureCapacity(students.size());
+        for (Student student : students) {
+            insertNode(student);
+        }
     }
 
     /**
@@ -36,6 +39,7 @@ public class Heap {
      */
     public void insertNode(Student in) {
         // TODO: implement this method
+
     }
 
     /**

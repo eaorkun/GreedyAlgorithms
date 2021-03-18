@@ -1,6 +1,6 @@
 /*
- * Name: <your name>
- * EID: <your EID>
+ * Name: Eralp Orkun
+ * EID: eao789
  */
 
 // Methods may be added to this file, but don't remove anything
