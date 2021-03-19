@@ -29,7 +29,31 @@ public class Program2 {
      */
     public int findMinimumStudentCost(Student start, Student dest) {
         // TODO: implement this function
+        initializeSingleSource(start);
+        minHeap.buildHeap(students);
+        while(minHeap.size() != 0){
+            Student minimum = minHeap.extractMin();
+            if(minimum.getName() == dest.getName()){
+                return minimum.getminCost();
+            }
+            for(int i = 0; i < minimum.getNeighbors().size(); ++i){
+                relax(minimum, minimum.getNeighbors().get(i), i);
+            }
+        }
         return -1;
+    }
+
+    private void initializeSingleSource(Student start){
+        for(int i = 0; i<students.size(); ++i){
+            students.get(i).setminCost(Integer.MAX_VALUE);
+        }
+        start.setminCost(0);
+    }
+
+    private void relax(Student u, Student v, int i){
+        if(v.getminCost() > u.getminCost() + u.getPrices().get(i)){
+            minHeap.changeKey(v, u.getminCost() + u.getPrices().get(i));
+        }
     }
 
     /**
