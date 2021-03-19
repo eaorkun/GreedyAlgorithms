@@ -24,6 +24,11 @@ public class Heap {
     public int size(){
         return size;
     }
+
+    public HashMap<Integer, Integer> getMap(){
+        return map;
+    }
+
     /**
      * buildHeap(ArrayList<Student> students)
      * Given an ArrayList of Students, build a min-heap keyed on each Student's minCost

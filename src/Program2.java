@@ -64,7 +64,26 @@ public class Program2 {
      */
     public int findMinimumClassCost() {
         // TODO: implement this function
-        return -1;
+        Student r = students.get(0);
+        for(int i = 0; i < students.size(); ++i){
+            students.get(i).setminCost(Integer.MAX_VALUE);
+        }
+        r.setminCost(0);
+        minHeap.buildHeap(students);
+        int minimumCost = 0;
+        while(minHeap.size() != 0){
+            Student minimum = minHeap.extractMin();
+            minimumCost = minimumCost + minimum.getminCost();
+            for(int i = 0; i < minimum.getNeighbors().size(); ++i){
+                if((minHeap.getMap().get(minimum.getNeighbors().get(i).getName()) != -1)
+                        && minimum.getPrices().get(i) < minimum.getNeighbors().get(i).getminCost()){
+                    minHeap.changeKey(minimum.getNeighbors().get(i), minimum.getPrices().get(i));
+                }
+            }
+        }
+
+
+        return minimumCost;
     }
 
     //returns edges and prices in a string.
