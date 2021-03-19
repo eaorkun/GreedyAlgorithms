@@ -8,14 +8,22 @@
 // Include this file in your final submission
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Heap {
     private ArrayList<Student> minHeap;
+    private int size;
+    private HashMap<Integer, Integer> map;
 
     public Heap() {
         minHeap = new ArrayList<Student>();
+        size = 0;
+        map = new HashMap<>();
     }
 
+    public int size(){
+        return size;
+    }
     /**
      * buildHeap(ArrayList<Student> students)
      * Given an ArrayList of Students, build a min-heap keyed on each Student's minCost
@@ -25,6 +33,10 @@ public class Heap {
      */
     public void buildHeap(ArrayList<Student> students) {
         minHeap.ensureCapacity(students.size());
+        size = 0;
+        for(Integer student : map.keySet()){
+            map.replace(student, -1);
+        }
         for (Student student : students) {
             insertNode(student);
         }
@@ -39,7 +51,35 @@ public class Heap {
      */
     public void insertNode(Student in) {
         // TODO: implement this method
+        if(minHeap.size() < size + 1){
+            minHeap.add(in);
+        }
+        else{
+            minHeap.set(size, in);
+        }
+        if(!map.containsKey(in.getName())){
+            map.put(in.getName(), size);
+        }
+        else{
+            map.replace(in.getName(), size);
+        }
 
+        heapifyUp(size);
+        ++size;
+    }
+
+    private void heapifyUp(int index){
+        if(index>0){
+            int indexP = (index/2);
+            if(minHeap.get(index).getminCost() < minHeap.get(indexP).getminCost()){
+                Student temp = minHeap.get(index);
+                minHeap.set(index, minHeap.get(indexP));
+                minHeap.set(indexP, temp);
+                map.replace(minHeap.get(index).getName(), index);
+                map.replace(minHeap.get(indexP).getName(), indexP);
+                heapifyUp(indexP);
+            }
+        }
     }
 
     /**
@@ -50,7 +90,7 @@ public class Heap {
      */
     public Student findMin() {
         // TODO: implement this method
-        return null;
+        return minHeap.get(0);
     }
 
     /**
@@ -61,7 +101,11 @@ public class Heap {
      */
     public Student extractMin() {
         // TODO: implement this method
-        return null;
+
+        Student minimum = minHeap.get(0);
+        delete(0);
+
+        return minimum;
     }
 
     /**
@@ -73,6 +117,41 @@ public class Heap {
      */
     public void delete(int index) {
         // TODO: implement this method
+        size--;
+        map.replace(minHeap.get(index).getName(), -1);
+        minHeap.set(index, minHeap.get(size));
+        map.replace(minHeap.get(index).getName(), index);
+        heapifyDown(index);
+    }
+
+    private void heapifyDown(int index){
+        int length = size -1;
+        int indexJ = 0;
+        if(2*index > length){
+            //Terminate with H unchanged
+            return;
+        }
+        else if (2*index < length){
+            int left = 2*index;
+            int right = 2*index + 1;
+            if(minHeap.get(left).getminCost() < minHeap.get(right).getminCost()){
+                indexJ = left;
+            }
+            else{
+                indexJ = right;
+            }
+        }
+        else if (2*index == length){
+            indexJ=2*index;
+        }
+        if(minHeap.get(indexJ).getminCost() < minHeap.get(index).getminCost()){
+            Student temp = minHeap.get(index);
+            minHeap.set(index, minHeap.get(indexJ));
+            minHeap.set(indexJ, temp);
+            map.replace(minHeap.get(index).getName(), index);
+            map.replace(minHeap.get(indexJ).getName(), indexJ);
+            heapifyDown(indexJ);
+        }
     }
 
     /**
@@ -85,11 +164,20 @@ public class Heap {
      */
     public void changeKey(Student r, int newCost) {
         // TODO: implement this method
+        int index = map.get(r.getName());
+        int oldCost = minHeap.get(index).getminCost();
+        minHeap.get(index).setminCost(newCost);
+        if(newCost>oldCost){
+            heapifyDown(index);
+        }
+        else{
+            heapifyUp(index);
+        }
     }
 
     public String toString() {
         String output = "";
-        for (int i = 0; i < minHeap.size(); i++) {
+        for (int i = 0; i < size; i++) {
             output += minHeap.get(i).getName() + " ";
         }
         return output;
