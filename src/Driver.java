@@ -100,6 +100,8 @@ public class Driver {
     // feel free to alter this method however you wish, we will replace it with our own version during grading
     public static void testRun() {
         if (testHeap) {
+            /*
+
             // test out Heap.java here
             Student zero = new Student(0);
             zero.setminCost(27);
@@ -221,13 +223,19 @@ public class Driver {
             minimum = testProgram2.getHeap().extractMin();
             System.out.println(minimum.getName() + ": " + minimum.getminCost());
 
+             */
         }
 
         if (testMinStuCost) {
             // test out Program2.java findMinimumStudentCost here
             System.out.println("\nGiven wire configuration: ");
             System.out.println(testProgram2);
-            System.out.println("Minimum student cost: \n" + testProgram2.findMinimumStudentCost(students.get(0), students.get(1)));
+            for(int i = 0; i < testProgram2.getAllstudents().size(); ++i){
+                for(int j = 0; j < testProgram2.getAllstudents().size(); ++j){
+                    System.out.println("Minimum student cost from " + i + " to " + (j+i)%testProgram2.getAllstudents().size()
+                            + ": " + testProgram2.findMinimumStudentCost(students.get(i), students.get((j+i)%testProgram2.getAllstudents().size())));
+                }
+            }
         }
 
         if (testMinClassCost) {
