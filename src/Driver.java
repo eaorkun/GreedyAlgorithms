@@ -101,20 +101,18 @@ public class Driver {
     public static void testRun() {
         if (testHeap) {
             // test out Heap.java here
-            // the code below is an example of how to test your heap
-            // you will want to do more extensive testing than just this
             Student zero = new Student(0);
             zero.setminCost(27);
             Student one = new Student(1);
             one.setminCost(11);
             Student two = new Student(2);
-            two.setminCost(42);
+            two.setminCost(27);
             Student three = new Student(3);
-            three.setminCost(55);
+            three.setminCost(27);
             Student four = new Student(4);
             four.setminCost(18);
             Student five = new Student(5);
-            five.setminCost(100);
+            five.setminCost(27);
             Student six = new Student(6);
             six.setminCost(50);
             Student seven = new Student(7);
@@ -125,7 +123,6 @@ public class Driver {
             nine.setminCost(23);
             Student ten = new Student(10);
             ten.setminCost(93);
-
 
             ArrayList<Student> tester = new ArrayList<>();
             tester.add(two);
@@ -141,15 +138,89 @@ public class Driver {
             tester.add(ten);
             testProgram2.getHeap().buildHeap(tester);
             System.out.println(testProgram2.getHeap());
-            testProgram2.getHeap().changeKey(zero, 100);
+            testProgram2.getHeap().changeKey(nine, 100);
+            System.out.println(testProgram2.getHeap());
             testProgram2.getHeap().changeKey(one, 1000);
             System.out.println(testProgram2.getHeap());
-            testProgram2.getHeap().delete(10);
-            while (testProgram2.getHeap().size() > 0){
-                Student minimum = testProgram2.getHeap().extractMin();
-                System.out.println(minimum.getName() + ": " + minimum.getminCost());
-            }
+            testProgram2.getHeap().delete(6);
             System.out.println(testProgram2.getHeap());
+            testProgram2.getHeap().delete(6);
+            System.out.println(testProgram2.getHeap());
+
+            Student minimum;
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            System.out.println(testProgram2.getHeap());
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            System.out.println(testProgram2.getHeap());
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            System.out.println(testProgram2.getHeap());
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            System.out.println(testProgram2.getHeap());
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            System.out.println(testProgram2.getHeap());
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            System.out.println(testProgram2.getHeap());
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            System.out.println(testProgram2.getHeap());
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            System.out.println(testProgram2.getHeap());
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            System.out.println(testProgram2.getHeap());
+
+            testProgram2.getHeap().buildHeap(tester);
+            System.out.println(testProgram2.getHeap());
+
+            tester.clear();
+            testProgram2.getHeap().buildHeap(tester);
+            System.out.println(testProgram2.getHeap());
+
+            tester.add(one);
+            tester.add(six);
+            tester.add(seven);
+            tester.add(nine);
+            tester.add(two);
+            testProgram2.getHeap().buildHeap(tester);
+            System.out.println(testProgram2.getHeap());
+
+            tester.clear();
+            tester.add(one);
+            tester.add(zero);
+            tester.add(ten);
+            testProgram2.getHeap().buildHeap(tester);
+            System.out.println(testProgram2.getHeap());
+
+            minimum = testProgram2.getHeap().findMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+            minimum = testProgram2.getHeap().findMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+
+            testProgram2.getHeap().insertNode(nine);
+            System.out.println(testProgram2.getHeap());
+            testProgram2.getHeap().insertNode(two);
+            System.out.println(testProgram2.getHeap());
+            testProgram2.getHeap().delete(0);
+            testProgram2.getHeap().delete(3);
+
+
+            System.out.println(testProgram2.getHeap());
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+
+            minimum = testProgram2.getHeap().extractMin();
+            System.out.println(minimum.getName() + ": " + minimum.getminCost());
+
         }
 
         if (testMinStuCost) {

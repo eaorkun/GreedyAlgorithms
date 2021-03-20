@@ -75,7 +75,7 @@ public class Heap {
 
     private void heapifyUp(int index){
         if(index>0){
-            int indexP = (index/2);
+            int indexP = (((index+1)/2) - 1);
             if((minHeap.get(index).getminCost() < minHeap.get(indexP).getminCost()) ||
                     ((minHeap.get(index).getminCost() == minHeap.get(indexP).getminCost()) && (minHeap.get(index).getName() < minHeap.get(indexP).getName()))){
                 Student temp = minHeap.get(index);
@@ -131,25 +131,25 @@ public class Heap {
     }
 
     private void heapifyDown(int index){
-        int length = size -1;
+        int maxIndex = size -1;
         int indexJ = 0;
-        if(2*index > length){
+        if((2*index + 1) > maxIndex){
             //Terminate with H unchanged
             return;
         }
-        else if (2*index < length){
-            int left = 2*index;
-            int right = 2*index + 1;
+        else if (2*index < maxIndex){
+            int left = 2*index + 1;
+            int right = 2*(index + 1);
             if((minHeap.get(left).getminCost() < minHeap.get(right).getminCost()) ||
-                    ((minHeap.get(left).getminCost() == minHeap.get(right).getminCost()) && (minHeap.get(left).getName() < minHeap.get(right).getminCost()))){
+                    ((minHeap.get(left).getminCost() == minHeap.get(right).getminCost()) && (minHeap.get(left).getName() < minHeap.get(right).getName()))){
                 indexJ = left;
             }
             else{
                 indexJ = right;
             }
         }
-        else if (2*index == length){
-            indexJ=2*index;
+        else if ((2*index + 1) == maxIndex){
+            indexJ=(2*index + 1);
         }
         if((minHeap.get(indexJ).getminCost() < minHeap.get(index).getminCost()) ||
                 ((minHeap.get(indexJ).getminCost() == minHeap.get(index).getminCost())&&(minHeap.get(indexJ).getName() < minHeap.get(index).getName()))){
