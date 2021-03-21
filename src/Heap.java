@@ -125,17 +125,18 @@ public class Heap {
         // TODO: implement this method
         size--;
         map.replace(minHeap.get(index).getName(), -1);
-        int oldCost = minHeap.get(index).getminCost();
-        minHeap.set(index, minHeap.get(size));
-        map.replace(minHeap.get(index).getName(), index);
-        int newCost = minHeap.get(index).getminCost();
-        if(newCost<oldCost){
-            heapifyUp(index);
+        if(index!= size){
+            int oldCost = minHeap.get(index).getminCost();
+            minHeap.set(index, minHeap.get(size));
+            map.replace(minHeap.get(index).getName(), index);
+            int newCost = minHeap.get(index).getminCost();
+            if(newCost<oldCost){
+                heapifyUp(index);
+            }
+            else{
+                heapifyDown(index);
+            }
         }
-        else{
-            heapifyDown(index);
-        }
-
     }
 
     private void heapifyDown(int index){
