@@ -125,9 +125,17 @@ public class Heap {
         // TODO: implement this method
         size--;
         map.replace(minHeap.get(index).getName(), -1);
+        int oldCost = minHeap.get(index).getminCost();
         minHeap.set(index, minHeap.get(size));
         map.replace(minHeap.get(index).getName(), index);
-        heapifyDown(index);
+        int newCost = minHeap.get(index).getminCost();
+        if(newCost<oldCost){
+            heapifyUp(index);
+        }
+        else{
+            heapifyDown(index);
+        }
+
     }
 
     private void heapifyDown(int index){
@@ -137,7 +145,7 @@ public class Heap {
             //Terminate with H unchanged
             return;
         }
-        else if (2*index < maxIndex){
+        else if ((2*index + 1) < maxIndex){
             int left = 2*index + 1;
             int right = 2*(index + 1);
             if((minHeap.get(left).getminCost() < minHeap.get(right).getminCost()) ||
@@ -182,6 +190,49 @@ public class Heap {
             heapifyUp(index);
         }
     }
+
+    // for debugging
+    public boolean isHeap(){
+        int maxIndex = size -1;
+        int index = 0;
+        boolean isHeap = true;
+        boolean check = true;
+        while(check){
+            if((2*index + 1) > maxIndex){
+                //Terminate with H unchanged
+                check = false;
+            }
+            else if ((2*index + 1) < maxIndex){
+                int left = 2*index + 1;
+                int right = 2*(index + 1);
+                if(!((minHeap.get(index).getminCost() < minHeap.get(left).getminCost()) ||
+                        ((minHeap.get(index).getminCost() == minHeap.get(left).getminCost()) && (minHeap.get(index).getName() < minHeap.get(left).getName())) ||
+                        ((minHeap.get(index).getminCost() == minHeap.get(left).getminCost()) && (minHeap.get(index).getName() == minHeap.get(left).getName())))){
+                    isHeap = false;
+                    check = false;
+                }
+                if(!((minHeap.get(index).getminCost() < minHeap.get(right).getminCost()) ||
+                        ((minHeap.get(index).getminCost() == minHeap.get(right).getminCost()) && (minHeap.get(index).getName() < minHeap.get(right).getName())) ||
+                        ((minHeap.get(index).getminCost() == minHeap.get(right).getminCost()) && (minHeap.get(index).getName() == minHeap.get(right).getName())))){
+                    isHeap = false;
+                    check = false;
+                }
+
+            }
+            else if ((2*index + 1) == maxIndex){
+                int left = 2*index + 1;
+                if(!((minHeap.get(index).getminCost() < minHeap.get(left).getminCost()) ||
+                        ((minHeap.get(index).getminCost() == minHeap.get(left).getminCost()) && (minHeap.get(index).getName() < minHeap.get(left).getName())) ||
+                        ((minHeap.get(index).getminCost() == minHeap.get(left).getminCost()) && (minHeap.get(index).getName() == minHeap.get(left).getName())))){
+                    isHeap = false;
+                    check = false;
+                }
+            }
+            index++;
+        }
+        return isHeap;
+    }
+
 
     public String toString() {
         String output = "";
