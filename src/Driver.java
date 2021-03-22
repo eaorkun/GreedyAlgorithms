@@ -348,7 +348,6 @@ public class Driver {
             min = testProgram2.getHeap().extractMin();
             System.out.println(min.getName());
             System.out.println(testProgram2.getHeap());
-
         }
 
         if (testMinStuCost) {
