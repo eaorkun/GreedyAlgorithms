@@ -243,7 +243,13 @@ public class Heap {
 //                      please do not change :)                              //
 ///////////////////////////////////////////////////////////////////////////////
 
+    //Given permission by TA Ali to adjust this function
+
     public ArrayList<Student> toArrayList() {
-        return minHeap;
+        ArrayList<Student> realHeap = new ArrayList<>();
+        for(int i = 0; i<size; ++i){
+            realHeap.add(minHeap.get(i));
+        }
+        return realHeap;
     }
 }
